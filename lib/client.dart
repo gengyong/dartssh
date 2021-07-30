@@ -499,7 +499,7 @@ class SSHClient extends SSHTransport with SSHAgentForwarding {
   @override
   void handleChannelData(Channel chan, Uint8List data) {
     if (chan == sessionChannel) {
-      response(this, utf8.decode(data));
+      response(this, utf8.decode(data, allowMalformed: true));
     } else if (chan.cb != null) {
       chan.cb(chan, data);
     } else if (chan.agentChannel) {

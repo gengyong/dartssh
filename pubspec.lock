@@ -455,7 +455,7 @@ packages:
       path: "."
       ref: HEAD
       resolved-ref: "028b09a31805c648df1db695f7a58f9fcd4099d9"
-      url: "https://github.com/TerminalStudio/tweetnacl-dart"
+      url: "https://github.com/gengyong/tweetnacl-dart"
     source: git
     version: "0.3.2"
   typed_data:

@@ -367,7 +367,7 @@ abstract class SSHTransport with SSHDiffieHellman {
       processed = newlineIndex + 1;
       if (line.startsWith('SSH-')) {
         verS = line;
-        serverVersion = toFloat(line.substring(4));
+        serverVersion = double.tryParse(RegExp(r'(\d+(\.\d+)?)').firstMatch(verS)?.group(0) ?? '2.0');
         state++;
         if (server) sendKeyExchangeInit(false);
         break;

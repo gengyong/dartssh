@@ -1031,6 +1031,8 @@ class MSG_CHANNEL_REQUEST extends SSHMessage {
       ret += 4 * 1 + term.length;
     } else if (requestType == 'window-change') {
       ret += 4 * 4;
+    } else if (requestType == 'exit-status') {
+      ret += 4 * 1;
     }
     return ret;
   }
@@ -1040,6 +1042,23 @@ class MSG_CHANNEL_REQUEST extends SSHMessage {
     recipientChannel = input.getUint32();
     requestType = deserializeString(input);
     wantReply = input.getUint8() != 0;
+    if (requestType == 'pty-req') {
+      term = deserializeString(input);
+      width = input.getUint32();
+      height = input.getUint32();
+      pixelWidth = input.getUint32();
+      pixelHeight = input.getUint32();
+      termMode = deserializeString(input);
+    } else if  (requestType == 'exec') {
+      term = deserializeString(input);
+    } else if (requestType == 'window-change') {
+      width = input.getUint32();
+      height = input.getUint32();
+      pixelWidth = input.getUint32();
+      pixelHeight = input.getUint32();
+    } else if (requestType == 'exit-status') {
+      width = input.getUint32();
+    }
   }
 
   @override
